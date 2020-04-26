@@ -1,22 +1,28 @@
 /* eslint-disable indent */
-import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+import { fetchGenre, gamesReducer } from '../reducers/gamesReducer';
 
 export const GenreDetails = () => {
   const { id } = useParams();
-  const history = useHistory();
-  const GENRE_URL = `https://api.rawg.io/api/genres/${id}`;
-  const [genre, setGenre] = useState();
+  // 1. Use dispatch to fetch this particular genre
+  const dispatch = useDispatch();
+
+  // 3. Use useSelector to get the genre details
+  const genreDetails = useSelector((store) => store.reducer.genreDetails);
+  const genre = genreDetails.hasOwnProperty(id) ? genreDetails[id] : null;
 
   useEffect(() => {
-    fetch(GENRE_URL)
-      .then(res => res.json())
-      .then(json => setGenre(json));
-  }, [GENRE_URL]);
+    // 4. Prevent reloading if we have the data from redux
+    if (genre) {
+      return;
+    }
+    dispatch(fetchGenre(id));
+  }, [dispatch, genre, id]);
 
-  // Check if things are not okay
   if (!genre) {
-    history.pushState("/games");
+    return <></>;
   }
 
   // Do things that are okay

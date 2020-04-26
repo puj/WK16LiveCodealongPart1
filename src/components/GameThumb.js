@@ -1,10 +1,12 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable indent */
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const GameThumb = ({ slug, name, rating, background_image }) => {
+  // Make use of loading state
+
   return (
     // TODO: make a link to the game itself
     <Link to={`/games/${slug}`}>
