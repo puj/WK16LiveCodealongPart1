@@ -47,13 +47,12 @@ code {
 
 .game-thumb-image {
   padding: 12px;
-  width: 200px;
-  height: 200px;
   object-fit: cover;
   webkit-transition: opacity 0.4s ease-in-out;
   -moz-transition: opacity 0.4s ease-in-out;
   -o-transition: opacity 0.4s ease-in-out;
   transition: opacity 0.4s ease-in-out;
+  background-color: #efefef;
 }
 
 .game-thumb-image-wrapper:hover .game-thumb-image {
@@ -105,9 +104,7 @@ code {
   align-items: center;
 }
 
-.game-details img {
-  width: 300px;
-  height: 300px;
+.game-overview > img {
   object-fit: cover;
   padding: 16px;
   background-color: #6e6e6e;
@@ -116,6 +113,10 @@ code {
 .game-overview {
   display: flex;
   flex-flow: row;
+}
+.game-overview > img {
+  width: 300px;
+  height: 300px;
 }
 
 .game-stats {

@@ -1,8 +1,9 @@
 /* eslint-disable indent */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
-import { fetchGenre, gamesReducer } from '../reducers/gamesReducer';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
+import { Circular } from "styled-loaders-react";
+import { fetchGenre, gamesReducer } from "../reducers/gamesReducer";
 
 export const GenreDetails = () => {
   const { id } = useParams();
@@ -11,6 +12,7 @@ export const GenreDetails = () => {
 
   // 3. Use useSelector to get the genre details
   const genreDetails = useSelector((store) => store.reducer.genreDetails);
+  const loading = useSelector((store) => store.reducer.loading);
   const genre = genreDetails.hasOwnProperty(id) ? genreDetails[id] : null;
 
   useEffect(() => {
@@ -21,8 +23,8 @@ export const GenreDetails = () => {
     dispatch(fetchGenre(id));
   }, [dispatch, genre, id]);
 
-  if (!genre) {
-    return <></>;
+  if (loading || !genre) {
+    return <Circular color="white" size="200px" />;
   }
 
   // Do things that are okay
